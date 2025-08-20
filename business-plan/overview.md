@@ -33,18 +33,21 @@ Thanks to being both local and open-source, it can be sold to enterprises with c
 
 ## appTape Hobby
 
-- 1 user
-- Small amount of credits included per month, worth ~$3 
-- Alternatively, Bring-Your-Own-API-Key
+"Managed mode" - frictionless experience with very-fast time-to-value. No need to configure anything.
+"High-control mode" - for developers, who want to use their own API keys, preferred models, and own AWS account.
+
+- AI models:
+  - Use appTape AI credits (max $3 worth of tokens per month). Sufficient to generate smaller applications. We'll use Cerebras GPT-OSS-120b model (cheap, super-fast)
+  - or Bring-Your-Own-API-Key
+- Infrastructure (Serverless only - Lambda functions, OpenNext Next.js, DynamoDb, S3, CloudFront):
+  - Deploy to Stacktape sandbox (maximum ~$3 worth of infrastructure per month). Suitable for apps and websites without large amounts of users.
+  - or Deploy to your own AWS account (requires connecting, so it can create friction for non-developers)
 - Basic context optimization techniques
-- Standard infrastructure resources (Lambda functions, Containers, Serverless Next.js, RDS, DynamoDb)
 - Community support
 
 Price: $0 / user / month
 
-Time to value is not as fast as web-based solutions (e.g. Lovable is faster). But downloading and running appTape is not far off (Running in ~25-30 seconds from user clicking on the Download button).
-
-## appTape Pro Individual (distributed as an addon to the downloadable binary)
+## appTape Pro Individual (distributed as an addon to the downloadable desktop app)
 
 - Unlimited users, team management
 - Advanced context optimization techniques
@@ -58,12 +61,12 @@ Price (2 modes):
 
 Upsell trigger: 
 - LLMs start to halucinate when their context is ~50-80% full, so without a proper context management, users will get stuck when developing non-trivial projects. When we see that users is stuck (trying to fix something multiple times without being successful), we offer appTape Pro with a discount for 1 month.
-- Proper context management is also necessary to reduce costs (up to 80% less)
+- Proper context management is also necessary to reduce costs (up to 80% less) and increase speed
 
 ## appTape Pro Team
 
+- Everything in appTape Pro Individual
 - Unlimited users, team management, usage stats
-- Enforce Privacy Mode org-wide
 - Code security scanning
 - AWS Infrastructure guardrails (enforcing security and scalability best practices)
 - Centralized team billing
@@ -105,9 +108,9 @@ There are know techniques:
 2. Retrieval-Augmented Generation (RAG) with Embeddings: Embed code, store in vector DB, retrieve semantically similar ones for queries.
 3. Memory Management (Sliding Windows) - Track session history (multi-turn conversations); use vector stores for long-term memory, evict old/irrelevant context.
 
-Interestingly, one twitter user has reverse-engineered how Cursor does it:
-- 
+Interestingly, one twitter user has reverse-engineered how Cursor does it: https://x.com/archiexzzz/status/1952062945204355233
 
-# Use-cases
+Context-optimization engine will be developed as a closed-source project. Source will be available on demand (should enterprise users need it for compliance/security audit reasons).
+It will be distributed as a binary "addon", pluggable to the appTape core, communicating with the core using IPC channel.
 
-## Business people
+The embeddings and vector store data will be saved locally, on the user's machine, for compliance/security reasons, and also for increased performance. Plus, to save our costs for infrastructure.
